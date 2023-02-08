@@ -20,6 +20,7 @@ let userRegister = async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(req.body.password, salt);
       req.body.password = hash;
+      delete req.body.confirmpassword;
 
       const userData = await db.collection("users").insertOne(req.body);
       res.json({ message: "User Added Successfully !" });
@@ -153,6 +154,7 @@ let resetPassword = async (req, res) => {
           const salt = await bcrypt.genSalt(10);
           const hash = await bcrypt.hash(req.body.password, salt);
           req.body.password = hash;
+          delete req.body.confirmpassword;
 
           let newPassword = await db
             .collection("users")
