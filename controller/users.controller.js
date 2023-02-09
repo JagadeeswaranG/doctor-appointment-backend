@@ -126,7 +126,7 @@ let forgotPassword = async (req, res) => {
       );
 
       return res.status(200).json({
-        message: "Password Reset link has been send to your registered email",
+        message: "Password Reset link has been send to your registered email, Please make use of this link within 5 mins.",
       });
     } else {
       res.status(404).json({ message: "User Email Id does not Exist !" });

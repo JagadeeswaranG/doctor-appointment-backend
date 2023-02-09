@@ -3,6 +3,7 @@ const mongoClient = mongodb.MongoClient;
 let connection;
 let db;
 
+// DB Connection
 let connectDB = async () => {
     let connection = await mongoClient.connect(process.env.DB);
     let db = connection.db("Doctor_booking");

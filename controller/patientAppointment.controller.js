@@ -15,7 +15,7 @@ let applyAppointment = async (req, res) => {
         .insertOne({ uId: new mongodb.ObjectId(req.params.uId), ...req.body });
       await closeConnection();
       res.json({
-        message: `Appointment confirmed. Your Appointment ID : ${patientApply.insertedId}`,
+        message: `${patientApply.insertedId}`,
       });
     } else {
       res.status(401).json({ message: "Unauthorized" });
