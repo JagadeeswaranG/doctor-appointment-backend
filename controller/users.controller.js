@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongodb = require("mongodb");
-const { randomBytes } = require("node:crypto");
+const crypto = require("crypto");
 const { connectDB, closeConnection } = require("../db/connection");
 const { passwordResetEmail } = require("../lib/sendEmail");
 
@@ -106,7 +106,7 @@ let forgotPassword = async (req, res) => {
         await db.collection("token").deleteOne({ userId: userEmail._id });
       }
 
-      let newToken = randomBytes(32).toString("hex");
+      let newToken = crypto.randomBytes(32).toString("hex");
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(newToken, salt);
       const tokenPayload = await db.collection("token").insertOne({
